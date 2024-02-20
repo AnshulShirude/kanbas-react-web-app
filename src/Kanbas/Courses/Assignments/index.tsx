@@ -25,9 +25,26 @@ function Assignments() {
                 <li className="list-group-item">
                   <FaEllipsisV className="me-2" />
                   <Link
+                    style={{
+                      color: "black",
+                      textDecoration: "none",
+                      fontSize: "17px",
+                    }}
                     to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}
                   >
                     {assignment.title}
+                    <label
+                      style={{
+                        display: "block",
+                        color: "red",
+                        fontSize: "16px",
+                        margin: "0",
+                        marginBottom: "0",
+                        paddingBottom: "0",
+                      }}
+                    >
+                      Multiple Modules
+                    </label>
                   </Link>
                   <span className="float-end">
                     <FaCheckCircle className="text-success" />
