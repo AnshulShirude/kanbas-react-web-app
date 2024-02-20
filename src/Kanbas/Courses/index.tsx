@@ -1,5 +1,11 @@
 import { courses } from "../../Kanbas/Database";
-import { Navigate, Route, Routes, useParams } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { HiMiniBars3 } from "react-icons/hi2";
 import CourseNavigation from "./Navigation";
 import Modules from "./Modules";
@@ -9,11 +15,22 @@ import Assignments from "./Assignments";
 function Courses() {
   const { courseId } = useParams();
   const course = courses.find((course) => course._id === courseId);
+  const location = useLocation();
+  const lastWord = location?.pathname?.split("/").pop()?.replace(/%20/g, ' ') || '';
+
   return (
     <div>
       <h1 style={{ color: "red", paddingLeft: "27px", fontSize: "37px" }}>
-        <HiMiniBars3 /> Course {course?.name}
+        <HiMiniBars3 /> Course {course?.name}{" "}
+        <i
+          style={{ color: "black", fontSize: "20px" }}
+          className="fa-solid fa-greater-than"
+        ></i>{" "}
+        <span style={{ color: "black" }}>{lastWord}</span>
       </h1>
+      
+      <hr/>
+
       <CourseNavigation />
       <div>
         <div
