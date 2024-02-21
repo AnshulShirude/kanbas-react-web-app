@@ -9,7 +9,26 @@ function Assignments() {
   return (
     <>
       <div style={{ marginTop: "20px" }}>
-        {/* {<!-- Add buttons and other fields here -->} */}
+        <div className="input-group mb-3">
+          <input
+            style={{ width: "100px" }}
+            type="text"
+            className="form-control"
+            placeholder="Search for Assignment"
+          />
+          <button type="button" className="btn btn-light">
+            <i className="fa-solid fa-plus"></i> Group
+          </button>
+          <button type="button" className="btn btn-danger">
+            <i className="fa-solid fa-plus"></i> Assignment
+          </button>
+
+          <button type="button" className="btn btn-light">
+            <i className="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+        </div>
+
+        <hr />
         <ul className="list-group wd-modules">
           <li className="list-group-item">
             <div>
@@ -33,18 +52,21 @@ function Assignments() {
                     to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}
                   >
                     {assignment.title}
-                    <label
+                    <br />
+                    <span
                       style={{
-                        display: "block",
+                        paddingLeft: "25px",
                         color: "red",
                         fontSize: "16px",
-                        margin: "0",
-                        marginBottom: "0",
-                        paddingBottom: "0",
                       }}
                     >
                       Multiple Modules
-                    </label>
+                    </span>{" "}
+                    |
+                    <span style={{ color: "black", fontSize: "16px" }}>
+                      {" "}
+                      Due Sep 7 at 11:59pm | 100 pts
+                    </span>
                   </Link>
                   <span className="float-end">
                     <FaCheckCircle className="text-success" />

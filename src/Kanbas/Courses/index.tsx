@@ -16,22 +16,23 @@ function Courses() {
   const { courseId } = useParams();
   const course = courses.find((course) => course._id === courseId);
   const location = useLocation();
-  const lastWord = location?.pathname?.split("/").pop()?.replace(/%20/g, ' ') || '';
+  const lastWord =
+    location?.pathname?.split("/").pop()?.replace(/%20/g, " ") || "";
 
   return (
     <div>
-      <h1 style={{ color: "red", paddingLeft: "27px", fontSize: "37px" }}>
-        <HiMiniBars3 /> Course {course?.name}{" "}
-        <i
-          style={{ color: "black", fontSize: "20px" }}
-          className="fa-solid fa-greater-than"
-        ></i>{" "}
-        <span style={{ color: "black" }}>{lastWord}</span>
-      </h1>
-      
-      <hr/>
-
-      <CourseNavigation />
+      <div className="d-md-block d-none">
+        <h1 style={{ color: "red", paddingLeft: "27px", fontSize: "37px" }}>
+          <HiMiniBars3 /> Course {course?.name}{" "}
+          <i
+            style={{ color: "black", fontSize: "20px" }}
+            className="fa-solid fa-greater-than"
+          ></i>{" "}
+          <span style={{ color: "black" }}>{lastWord}</span>
+        </h1>
+        <hr />
+        <CourseNavigation />
+      </div>
       <div>
         <div
           className="overflow-y-scroll position-fixed bottom-0 end-0"
