@@ -16,44 +16,11 @@ import { KanbasState } from "../../store";
 
 function ModuleList() {
   const { courseId } = useParams<{ courseId: string }>();
-  // const [moduleList, setModuleList] = useState<any[]>(db.modules);
-  // const [module, setModule] = useState({
-  //   name: "New Module",
-  //   description: "New Description",
-  //   course: courseId,
-  //   _id: new Date().getTime().toString(),
-  // });
   const moduleList = useSelector((state: KanbasState) => 
     state.modulesReducer.modules);
   const module = useSelector((state: KanbasState) => 
     state.modulesReducer.module);
   const dispatch = useDispatch();
-
-  console.log("Hello");
-  console.log(moduleList);
-
-  // const addModule = (module: any) => {
-  //   const newModule = { ...module, _id: new Date().getTime().toString() };
-  //   const newModuleList = [...moduleList, newModule];
-  //   setModuleList(newModuleList);
-  // };
-  // const deleteModule = (moduleId: string) => {
-  //   const newModuleList = moduleList.filter(
-  //     (module) => module._id !== moduleId
-  //   );
-  //   setModuleList(newModuleList);
-  // };
-  // const updateModule = () => {
-  //   setModuleList(
-  //     moduleList.map((m) => {
-  //       if (m._id === module._id) {
-  //         return module;
-  //       } else {
-  //         return m;
-  //       }
-  //     })
-  //   );
-  // };
 
   return (
     <>
@@ -317,7 +284,7 @@ function ModuleList() {
                     <FaEllipsisV className="ms-2" />
                   </span>
                 </div>
-                {/* <ul className="list-group">
+                <ul className="list-group">
                   {module.lessons?.map(
                     (lesson: {
                       _id: Key | null | undefined;
@@ -341,7 +308,7 @@ function ModuleList() {
                       </li>
                     )
                   )}
-                </ul> */}
+                </ul>
               </li>
             ))}
         </ul>
