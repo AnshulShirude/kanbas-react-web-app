@@ -1,21 +1,45 @@
-import { useState } from "react";
+import {
+  JSXElementConstructor,
+  Key,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+  useState,
+} from "react";
 import "./index.css";
-import { modules } from "../../Database";
+import { db } from "../../Database/index";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import { useParams } from "react-router";
 
 function ModuleList() {
   const { courseId } = useParams<{ courseId: string }>();
-  const modulesList = modules.filter((module) => module.course === courseId);
-  const [expandedModules, setExpandedModules] = useState<{
-    [key: string]: boolean;
-  }>({});
-
-  const toggleModuleCollapse = (moduleId: string) => {
-    setExpandedModules((prev) => ({
-      ...prev,
-      [moduleId]: !prev[moduleId],
-    }));
+  const [moduleList, setModuleList] = useState<any[]>(db.modules);
+  const [module, setModule] = useState({
+    name: "New Module",
+    description: "New Description",
+    course: courseId,
+    _id: new Date().getTime().toString(),
+  });
+  const addModule = (module: any) => {
+    const newModule = { ...module, _id: new Date().getTime().toString() };
+    const newModuleList = [newModule, ...moduleList];
+    setModuleList(newModuleList);
+  };
+  const deleteModule = (moduleId: string) => {
+    const newModuleList = moduleList.filter(
+      (module) => module._id !== moduleId
+    );
+    setModuleList(newModuleList);
+  };
+  const updateModule = () => {
+    const newModuleList = moduleList.map((m) => {
+      if (m._id === module._id) {
+        return module;
+      } else {
+        return m;
+      }
+    });
+    setModuleList(newModuleList);
   };
 
   return (
@@ -185,11 +209,7 @@ function ModuleList() {
       </div>
 
       <div style={{ marginTop: "20px" }}>
-        <button
-          type="button"
-          className="btn btn-light"
-          onClick={() => setExpandedModules({})}
-        >
+        <button type="button" className="btn btn-light">
           Collapse All
         </button>
         <button type="button" className="btn btn-light">
@@ -224,37 +244,101 @@ function ModuleList() {
         </button>
         <hr />
         <ul className="list-group wd-modules">
-          {modulesList.map((module) => (
-            <li
-              className="list-group-item"
-              key={module._id}
-              onClick={() => toggleModuleCollapse(module._id)}
+          <li className="list-group-item">
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={() => {
+                addModule(module);
+              }}
             >
-              <div>
-                <FaEllipsisV className="me-2" />
-                {module.name}
-                <span className="float-end">
-                  <FaCheckCircle className="text-success" />
-                  <FaPlusCircle className="ms-2" />
-                  <FaEllipsisV className="ms-2" />
-                </span>
-              </div>
-              {expandedModules[module._id] && (
+              Add
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={updateModule}
+            >
+              Update
+            </button>
+            <input
+              className="form-control"
+              value={module.name}
+              onChange={(e) =>
+                setModule({
+                  ...module,
+                  name: e.target.value,
+                })
+              }
+            />
+            <textarea
+            className="form-control"
+              value={module.description}
+              onChange={(e) =>
+                setModule({
+                  ...module,
+                  description: e.target.value,
+                })
+              }
+            />
+          </li>
+
+          {moduleList
+            .filter((module) => module.course === courseId)
+            .map((module, index) => (
+              <li key={index} className="list-group-item">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={(event) => {
+                    setModule(module);
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => deleteModule(module._id)}
+                >
+                  Delete
+                </button>
+                <div>
+                  <FaEllipsisV className="me-2" />
+                  {module.name}
+                  <span className="float-end">
+                    <FaCheckCircle className="text-success" />
+                    <FaPlusCircle className="ms-2" />
+                    <FaEllipsisV className="ms-2" />
+                  </span>
+                </div>
                 <ul className="list-group">
-                  {module.lessons?.map((lesson) => (
-                    <li className="list-group-item" key={lesson._id}>
-                      <FaEllipsisV className="me-2" />
-                      {lesson.name}
-                      <span className="float-end">
-                        <FaCheckCircle className="text-success" />
-                        <FaEllipsisV className="ms-2" />
-                      </span>
-                    </li>
-                  ))}
+                  {module.lessons?.map(
+                    (lesson: {
+                      _id: Key | null | undefined;
+                      name:
+                        | string
+                        | number
+                        | boolean
+                        | ReactElement<any, string | JSXElementConstructor<any>>
+                        | Iterable<ReactNode>
+                        | ReactPortal
+                        | null
+                        | undefined;
+                    }) => (
+                      <li className="list-group-item" key={lesson._id}>
+                        <FaEllipsisV className="me-2" />
+                        {lesson.name}
+                        <span className="float-end">
+                          <FaCheckCircle className="text-success" />
+                          <FaEllipsisV className="ms-2" />
+                        </span>
+                      </li>
+                    )
+                  )}
                 </ul>
-              )}
-            </li>
-          ))}
+              </li>
+            ))}
         </ul>
       </div>
     </>
