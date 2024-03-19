@@ -7,33 +7,6 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
   addNewCourse: () => void; deleteCourse: (course: any) => void;
   updateCourse: () => void; }) {
 
-  // const [_courses, setCourses] = useState(courses);
-  // const [course, setCourse] = useState({
-  //   _id: "0",
-  //   name: "New Course",
-  //   number: "New Number",
-  //   startDate: "2023-09-10",
-  //   endDate: "2023-12-15",
-  //   image: "../../../images/reactjs.jpg",
-  // });
-  // const updateCourse = () => {
-  //   setCourses(
-  //     courses.map((c) => {
-  //       if (c._id === course._id) {
-  //         return course;
-  //       } else {
-  //         return c;
-  //       }
-  //     })
-  //   );
-  // };
-  // const addNewCourse = () => {
-  //   const newCourse = { ...course, _id: new Date().getTime().toString() };
-  //   setCourses([..._courses, { ...course, ...newCourse }]);
-  // };
-  // const deleteCourse = (courseId: string) => {
-  //   setCourses(_courses.filter((course) => course._id !== courseId));
-  // };
   return (
     <div className="p-4">
       <h1>Dashboard</h1> <hr />
@@ -70,7 +43,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
             <div key={course._id} className="col" style={{ width: 300 }}>
               <div className="card">
                 <img
-                  src={`/images/${course.image}`}
+                  src={course.image ? `/images/${course.image}` : '/images/default.jpg'}
                   className="card-img-top"
                   style={{ height: 150 }}
                 />
