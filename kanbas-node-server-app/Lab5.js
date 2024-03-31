@@ -158,5 +158,14 @@ const Lab5 = (app) => {
         todos.push(newTodo);
         res.json(newTodo);
     });
+    app.put("/a5/todos/:id", (req, res) => {
+        const { id } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.title = req.body.title;
+        todo.description = req.body.description;
+        todo.due = req.body.due;
+        todo.completed = req.body.completed;
+        res.sendStatus(200);
+      });    
 };
 export default Lab5;
