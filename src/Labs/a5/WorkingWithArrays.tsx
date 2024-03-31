@@ -44,6 +44,10 @@ function WorkingWithArrays() {
     const response = await axios.delete(`${API}/${todo.id}`);
     setTodos(todos.filter((t) => t.id !== todo.id));
   };
+  const updateTodo = async () => {
+    const response = await axios.put(`${API}/${todo.id}`, todo);
+    setTodos(todos.map((t) => (t.id === todo.id ? todo : t)));
+  };
 
   return (
     <div>
@@ -102,7 +106,10 @@ function WorkingWithArrays() {
         />
         Completed
       </label>
+      <br />
       <button onClick={postTodo}> Post Todo </button>
+      <br />
+      <button onClick={updateTodo}>Update Todo</button>
 
       <h3>Filtering Array Items</h3>
       <a className="btn btn-success" href={`${API}?completed=true`}>
@@ -120,12 +127,9 @@ function WorkingWithArrays() {
       <a className="btn btn-danger" href={`${API}/${todo.id}/delete`}>
         Delete Todo with ID = {todo.id}
       </a>
-        
+
       <br />
-      <button
-        onClick={() => deleteTodo(todo)}
-        className="btn btn-danger"
-      >
+      <button onClick={() => deleteTodo(todo)} className="btn btn-danger">
         Delete
       </button>
       <h2>Working with Arrays</h2>
