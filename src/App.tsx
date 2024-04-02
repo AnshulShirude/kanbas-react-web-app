@@ -5,6 +5,7 @@ import Kanbas from "./Kanbas";
 import { HashRouter } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
 
+// Main function
 function App() {
   return (
     <HashRouter>
