@@ -37,3 +37,11 @@ export const findUserById = async (id: string) => {
   const response = await axios.get(`${USERS_API}/${id}`);
   return response.data;
 };
+export const signup = async (user : any) => {
+  const response = await axios.post(`${USERS_API}/signup`, user);
+  return response.data;
+};
+export const signout = async () => {
+  const response = await axios.post(`${USERS_API}/signout`);
+  return response.data;
+};

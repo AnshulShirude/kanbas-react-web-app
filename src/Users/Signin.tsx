@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "./client";
 import * as client from "./client";
+import Signup from "./Signup";
 export default function Signin() {
   const [credentials, setCredentials] = useState<User>({
     _id: "",
@@ -17,6 +18,7 @@ export default function Signin() {
     navigate("/Kanbas/Account/Profile");
   };
   return (
+    <>
     <div>
       <h1>Signin</h1>
       <input
@@ -33,5 +35,7 @@ export default function Signin() {
       />
       <button onClick={signin}> Signin </button>
     </div>
+    <Signup />
+    </>
   );
 }
