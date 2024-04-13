@@ -16,7 +16,7 @@ function WorkingWithObjects() {
     course: "CS 4550",
   });
 
-  const API_BASE = process.env.REACT_APP_API_BASE;
+  const API_BASE = process.env.REACT_APP_BASE_API_URL;
   const ASSIGNMENT_URL = `${API_BASE}/a5/assignment`;
   const fetchAssignment = async () => {
     const response = await axios.get(`${ASSIGNMENT_URL}`);

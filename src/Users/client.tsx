@@ -11,6 +11,7 @@ export interface User {
 }
 export const signin = async (credentials: User) => {
   const response = await axios.post(`${USERS_API}/signin`, credentials);
+  console.log(response.data);
   return response.data;
 };
 export const profile = async () => {

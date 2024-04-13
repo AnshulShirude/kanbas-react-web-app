@@ -9,7 +9,7 @@ import store from "./store";
 import { Provider } from "react-redux";
 
 function Kanbas() {
-  const API_BASE = process.env.REACT_APP_API_BASE;
+  const API_BASE = process.env.REACT_APP_BASE_API_URL;
   const [courses, setCourses] = useState<any[]>([]);
   const COURSES_API = `${API_BASE}/api/courses`;
   const findAllCourses = async () => {

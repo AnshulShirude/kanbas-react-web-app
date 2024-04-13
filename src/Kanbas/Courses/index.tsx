@@ -15,7 +15,7 @@ import Home from "./Home";
 import Assignments from "./Assignments";
 
 function Courses() {
-  const API_BASE = process.env.REACT_APP_API_BASE;
+  const API_BASE = process.env.REACT_APP_BASE_API_URL;
   const { courseId } = useParams();
   const COURSES_API = `${API_BASE}/api/courses`;
   const [course, setCourse] = useState<any>({ _id: "" });
