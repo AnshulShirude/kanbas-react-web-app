@@ -17,6 +17,12 @@ export default function UserTable() {
       console.log(err);
     }
   };
+  const [role, setRole] = useState("USER");
+  const fetchUsersByRole = async (role: string) => {
+    const users = await client.findUsersByRole(role);
+    setRole(role);
+    setUsers(users);
+  };
   const [user, setUser] = useState<User>({
     _id: "",
     username: "",
@@ -58,6 +64,16 @@ export default function UserTable() {
   }, []);
   return (
     <div>
+      <select
+        onChange={(e) => fetchUsersByRole(e.target.value)}
+        value={role || "USER"}
+        className="form-control w-25 float-end"
+      >
+        <option value="USER">User</option>
+        <option value="ADMIN">Admin</option>
+        <option value="FACULTY">Faculty</option>
+        <option value="STUDENT">Student</option>
+      </select>
       <h1>User Table</h1>
       <table className="table">
         <thead>

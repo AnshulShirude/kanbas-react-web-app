@@ -1,7 +1,7 @@
 import * as client from "./client";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-export default function Profile() {
+function Profile() {
   const [profile, setProfile] = useState({
     username: "",
     password: "",
@@ -82,3 +82,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export default Profile;
